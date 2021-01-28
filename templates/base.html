@@ -23,25 +23,25 @@
     </div>
     <div id="menu">
         <li><a href="{% url 'home' %}">Home</a></li>
-        <li><a href="#">Bookmark</a></li> 
+        <li><a href="#">Weather</a></li> 
         <li><a href="{% url 'news:index' %}">News</a></li> 
-        <li><a href="#">Photo</a></li>
+        <li><a href="#">Stock</a></li>
         <li><a href="#">Add&bigtriangledown;</a>
             <ul>
-                <li><a href="#">Bookmark</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Photo</a></li>
+                <li><a href="#">Weather</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Stock</a></li>
             </ul>
         </li>
         <li><a href="#">Change&bigtriangledown;</a>
             <ul>
-                <li><a href="#">Bookmark</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Photo</a></li>
+                <li><a href="#">Weather</a></li>
+                <li><a href="#">News</a></li>
+                <li><a href="#">Stock</a></li>
             </ul>
         </li>
         <li><a href="#">Archive</a></li>
-        <li><a href="#">Search</a></li>
+        <li><a href="{% url 'news:search' %}">Search</a></li>
         <li><a href="{% url 'admin:index' %}">Admin</a></li>
     </div>
     {% block content %}{% endblock %}
