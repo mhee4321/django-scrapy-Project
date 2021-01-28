@@ -32,10 +32,10 @@ div#content {
 }
 div#footer {
     position: absolute;
-    bottom: 20px;
+    bottom: 10px;
     left: 50px;
     right: 50px;
-    height: 30px;
+    height: 10px;
     border-top:1px solid #ccc;
 }
 /* HEADER */

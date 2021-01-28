@@ -2,17 +2,40 @@
 {% block title %}News List{% endblock %}
 {% block content %}
 
-<!-- 
-<script type="text/javascript">
-$('.refresh').click(function(){
-    os.system('scrapy crawl newsbot -t csv -o - > "path"')
-}
-
-</script> -->
-
 <div id="content">
 <h1>News List</h1>
-<input type="button" id="refresh" value="refresh new data" style="height: 30px; width: 120px;">
+
+<div class="row">
+    <div class="col-4" style="float: left;">
+        <form action="" method="post">
+            {% csrf_token %}
+            <input type="submit" name="refresh" value="refresh new data" style="height: 30px; width: 120px;">
+        </form>
+    </div>
+    
+    <div id="col-6" style="float: right;">
+        <form action="" method="POST">
+            {% csrf_token %}
+            <input type="text" name="find_word" value="{{ find_word }}">
+            <input type="submit" value="Search">
+        </form>
+
+<br/><br/>
+
+        {% if search_list %}
+            {% for news in search_list %}
+                <h3>{{ news.title }}</h3>
+                {{ news.saved_time }}
+                <p>{{ news.content }}</p>
+                <p>{{ news.company }}</p>
+            {% endfor %}
+        {% elif search_keyword %}
+            [{{ search_keyword }}]의 검색 결과가 없습니다.
+        {% endif %}
+    </div>
+
+</div>
+
 
 <div class="container">
     <table class="table table-striped">
@@ -27,7 +50,7 @@ $('.refresh').click(function(){
         <tbody>
             {% for news in object_list %}
             <tr>
-                <td><a href="{% url 'news:detail' news.id %}"></a>{{ news.title }}</td>
+                <td><a href="{% url 'news:detail' news.id %}">{{ news.title }}</a></td>
                 <td>{{ news.content }}</td>
                 <td>{{ news.company }}</td>
                 <td>{{ news.saved_time }}</td>
@@ -36,30 +59,46 @@ $('.refresh').click(function(){
         </tbody>
     </table>
 
-            <nav>
+    <!-- paging link -->
+    <div>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+        {% endif %}
+        [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    <br><br>
+
+            <!-- <nav>
                 <ul class="pagination">
                     <li class="page-item">
-                        {% if page.has_previous %}
-                            <a class="page-link" href="?page={{page.previous_page_number}}">Previous</a>
+                        {% if page_obj.has_previous %}
+                            <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
                         {% endif %}
                     </li>
                     <li class="page-item">
-                        <a class="page-link">Page {{page.number}} of {{page.paginator.num_pages}}</a>
+                        [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
                     </li>
                     <li class="page-item">
-                        {% if page.has_next %}
-                            <a class="page-link" href="?page={{page.next_page_number}}">Next</a>
+                        {% if page_obj.has_next %}
+                            <a href="?page={{ page_obj.next_page_number }}">Next</a>
                         {% endif %}
                     </li>
                 </ul>
-            </nav>
+            </nav> -->
             
     </div>
 
 
 </div> 
 
-{% endblock %}
+
+{% endblock content %}
+
+
+
 
 
 

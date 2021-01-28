@@ -17,5 +17,15 @@ class News(models.Model):
         # verbose_name = 'news'
         # verbose_name_plural = 'newsapp'
         db_table = 'news'
-        # ordering = ('modify_date', 'author') # asc & author
         ordering = ('-saved_time',) # desc,
+
+    # def get_absolute_url(self):
+    #     return reverse('news:detail', args=(self.id,))
+
+    # def get_previous_post(self):
+    #     return self.get_previous_by_saved_time()
+
+    # def get_next_post(self):
+    #     return self.get_next_by_saved_time()
+
+

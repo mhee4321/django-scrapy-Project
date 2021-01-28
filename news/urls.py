@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from news.views import NewsLV, NewsDV
+from news.views import NewsLV, NewsDV, RefreshFormView, SearchFormView
 
 app_name = 'news'
 
 urlpatterns = [
     path('', NewsLV.as_view(), name='index'),
+    path('list/', NewsLV.as_view(), name='list'),
     path('<int:pk>', NewsDV.as_view(), name='detail'),
+    path('', RefreshFormView.as_view(), name='refresh'),
+    path('search/', SearchFormView.as_view(), name='search'),
 ]
