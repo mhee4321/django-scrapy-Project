@@ -3,13 +3,13 @@
 {% block content %}
 
 <div id="content">
-<h1>News List</h1>
+<h1>Weather List</h1>
 
 <div class="row">
     <div class="col-4" style="float: left;">
         <form action="" method="POST">
             {% csrf_token %}
-            <input type="submit" value="refresh new data" style="height: 30px; width: 120px;">
+            <input type="submit" name="refresh" value="refresh new data" style="height: 30px; width: 120px;" onclick="location.href='news/refresh'">
         </form>
     </div>
     
@@ -41,19 +41,29 @@
     <table class="table table-striped">
         <thead>
             <tr>
-                <td>뉴스제목</td>
-                <td>뉴스요약</td>
-                <td>출처</td>
-                <td>게시날짜</td>
+                <td>도시</td>
+                <td>날짜</td>
+                <td>날씨요약</td>
+                <td>최저기온</td>
+                <td>최고기온</td>
+                <td>습도</td>
+                <td>기압</td>
+                <td>풍향</td>
+                <td>풍속</td>
             </tr>
         </thead>
         <tbody>
-            {% for news in object_list %}
+            {% for weather in object_list %}
             <tr>
-                <td><a href="{% url 'news:detail' news.id %}">{{ news.title }}</a></td>
-                <td>{{ news.content }}</td>
-                <td>{{ news.company }}</td>
-                <td>{{ news.saved_time }}</td>
+                <td><a href="{% url 'weather:detail' weather.id %}">{{ weather.city }}</a></td>
+                <td>{{ weather.date }}</td>
+                <td>{{ weather.desc }}</td>
+                <td>{{ weather.temp_min }}</td>
+                <td>{{ weather.temp_max }}</td>
+                <td>{{ weather.humidity }}</td>
+                <td>{{ weather.pressure }}</td>
+                <td>{{ weather.deg }}</td>
+                <td>{{ weather.speed }}</td>
             </tr>
             {% endfor %}
         </tbody>

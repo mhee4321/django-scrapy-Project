@@ -2,10 +2,7 @@ from django import forms
 from .models import News
 
 class RefreshForm(forms.Form):
-    title = forms.CharField()
-    content = forms.CharField()
-    company = forms.CharField()
-    saved_time = forms.CharField()
+    forms = News
 
-class SearchForm(forms.Form):
+class PostSearchForm(forms.Form):
     search_word = forms.CharField(label = 'Search News')

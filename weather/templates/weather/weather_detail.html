@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}News Detail{% endblock %}
+{% block content %}
+    <div id="content">
+        <h1>{{ object.title }}</h1>
+        <h5><a href="https://news.naver.com/main/read.nhn?mode=LS2D&mid=shm&sid1=105&sid2=230&oid=092&aid=0002212050" target="_blank">기사보기</a></h5>
+       <ul>
+            <li>요약 : {{ object.content }}</li>
+            <li>출판사 : {{ object.company }}</li>
+            <li>출판시간 : {{ object.saved_time }}</li>
+        </ul>
+    </div> 
+{% endblock %}
+
+

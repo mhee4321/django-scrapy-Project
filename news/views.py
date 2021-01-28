@@ -1,7 +1,7 @@
 from django.http import HttpResponse, JsonResponse
 from django.views.generic import ListView, DetailView, FormView
 from .models import News
-from .forms import RefreshForm, SearchForm
+from .forms import RefreshForm, PostSearchForm
 from django.db.models import Q
 from django.shortcuts import render
 import os
@@ -28,11 +28,11 @@ class RefreshFormView(FormView):
         return super().form_valid(form)
 
 class SearchFormView(FormView):
-    form_class = SearchForm
-    template_name = "news/news_list.html"
+    form_class = PostSearchForm
+    template_name = "news/news_search.html"
 
     def form_valid(self, form):
-        find_word = self.request.POST('search_word')
+        find_word = self.request.POST['search_word']
         news_list = News.objects.filter(Q(title__icontains=find_word) | Q(content__icontains=find_word) | Q(company__icontains=find_word)).distinct()
 
         context = {}
@@ -40,4 +40,4 @@ class SearchFormView(FormView):
         context['search_keyword'] = find_word
         context['search_list'] = news_list
 
-        return render(self.request, self.template_name, context)
+        return render(self.request, self.template_name,  context)
