@@ -1,95 +1,144 @@
 {% extends "base.html" %}
 {% block title %}News List{% endblock %}
 {% block content %}
+{% load static %}
+
 
 <div id="content">
 <h1>Weather List</h1>
 
-<h3> expeted weather </h3>
-<div class="container">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <td>도시</td>
-                <td>날짜</td>
-                <td>날씨요약</td>
-                <td>최저기온</td>
-                <td>최고기온</td>
-                <td>습도</td>
-                <td>기압</td>
-                <td>풍향</td>
-                <td>풍속</td>
-            </tr>
-        </thead>
-        <tbody>
-            {% for weather in object_list %}
-            <tr>
-                <td><a href="{% url 'weather:detail' weather.id %}"></a>{{ weather.city }}</a></td>
-                <td>{{ weather.date }}</td>
-                <td>{{ weather.desc }}</td>
-                <td>{{ weather.temp_min }}</td>
-                <td>{{ weather.temp_max }}</td>
-                <td>{{ weather.humidity }}</td>
-                <td>{{ weather.pressure }}</td>
-                <td>{{ weather.deg }}</td>
-                <td>{{ weather.speed }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-
-    </div><!--container-->
-
+<div class="row">
+    <!-- <div class="col-xs-6 .col-md-4"> -->
     <h3> real weather </h3>
-    <div class="container">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <td>도시</td>
-                    <td>날짜</td>
-                    <td>날씨요약</td>
-                    <td>최저기온</td>
-                    <td>최고기온</td>
-                    <td>습도</td>
-                    <td>기압</td>
-                    <td>풍향</td>
-                    <td>풍속</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for weather in object_list %}
-                    
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
                     <tr>
-                        <!--<a href="{% url 'weather:detail' weather.id %}">-->
-                        <td>{{ weather.city }}</td>
-                        <td>{{ weather.date }}</td>
-                        <td>{{ weather.desc }}</td>
-                        <td>{{ weather.temp_min }}</td>
-                        <td>{{ weather.temp_max }}</td>
-                        <td>{{ weather.humidity }}</td>
-                        <td>{{ weather.pressure }}</td>
-                        <td>{{ weather.deg }}</td>
-                        <td>{{ weather.speed }}</td>
+                        <td>도시</td>
+                        <td>날짜</td>
+                        <td>날씨요약</td>
+                        <td>최저기온</td>
+                        <td>최고기온</td>
+                        <td>습도</td>
+                        <td>기압</td>
+                        <td>풍향</td>
+                        <td>풍속</td>
                     </tr>
-                    
-                {% endfor %}
-            </tbody>
-        </table>
-    
-        <!-- paging link -->
-        <div>
-            {% if page_obj.has_previous %}
-                <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
-            {% endif %}
-            [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">Next</a>
-            {% endif %}
+                </thead>
+                <tbody>
+                    {% for weather in object_list %}
+                        {% if weather.date < '2021-01-30' %}
+                        <tr>
+                            <td>{{ weather.city }}</td>
+                            <td><a href="{% url 'weather:detail' weather.id %}">{{ weather.date }}</a></td>
+                            <td>{{ weather.desc }}</td>
+                            <td>{{ weather.temp_min }}</td>
+                            <td>{{ weather.temp_max }}</td>
+                            <td>{{ weather.humidity }}</td>
+                            <td>{{ weather.pressure }}</td>
+                            <td>{{ weather.deg }}</td>
+                            <td>{{ weather.speed }}</td>
+                        </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div><!--container-->
+    <!-- </div>col -->
+
+    <!-- <div class="col-xs-6 .col-md-4">  -->
+    <h3> expected weather </h3>
+        <div class="container">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <td>도시</td>
+                        <td>날짜</td>
+                        <td>날씨요약</td>
+                        <td>최저기온</td>
+                        <td>최고기온</td>
+                        <td>습도</td>
+                        <td>기압</td>
+                        <td>풍향</td>
+                        <td>풍속</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for weather in object_list %}
+                        {% if weather.date > '2021-01-30' %}
+                            <tr>
+                                <td>{{ weather.city }}</td>
+                                <td><a href="{% url 'weather:detail' weather.id %}">{{ weather.date }}</a></td>
+                                <td>{{ weather.desc }}</td>
+                                <td>{{ weather.temp_min }}</td>
+                                <td>{{ weather.temp_max }}</td>
+                                <td>{{ weather.humidity }}</td>
+                                <td>{{ weather.pressure }}</td>
+                                <td>{{ weather.deg }}</td>
+                                <td>{{ weather.speed }}</td>
+                            </tr>
+                        {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div><!--container-->
+    <!-- </div>col -->
+</div><!--row-->
+
+<hr>
+
+<!-- paging link -->
+<div>
+    {% if page_obj.has_previous %}
+        <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+    {% endif %}
+    [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
+    {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">Next</a>
+    {% endif %}
+</div>
+
+<br><br>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-6 .col-md-4">
+            <h6><최고기온별 그래프></h6>
+            <img src="{% static 'img/temp_max.png' %}" style="height: 300px; width: 400px;" />
         </div>
+        <div class="col-xs-6 .col-md-4">
+            <h6><최저기온별 그래프></h6>
+            <img src="{% static 'img/temp_min.png' %}" style="height: 300px; width: 400px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 .col-md-4">
+            <h6><습도별 그래프></h6>
+            <img src="{% static 'img/humidity.png' %}" style="height: 300px; width: 400px;" />
+        </div>
+        <div class="col-xs-6 .col-md-4">
+            <h6><기압별 그래프></h6>
+            <img src="{% static 'img/pressure.png' %}" style="height: 300px; width: 400px;" />
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 .col-md-4">
+            <h6><풍향별 그래프></h6>
+            <img src="{% static 'img/deg.png' %}" style="height: 300px; width: 400px;" />
+        </div>
+        <div class="col-xs-6 .col-md-4">
+            <h6><풍속별 그래프></h6>
+            <img src="{% static 'img/speed.png' %}" style="height: 300px; width: 400px;" />
+        </div>
+    </div>
+</div>
+
+        
         <br><br>
     
-               
-        </div><!--container-->
+
 
 
 </div> <!--main content-->
