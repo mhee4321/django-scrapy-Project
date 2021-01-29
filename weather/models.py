@@ -1,6 +1,7 @@
 from django.db import models
 
 class Weather(models.Model):
+    objects = models.Manager()
     city = models.CharField('CITY', max_length=50)
     date = models.TextField('DATE')
     desc = models.TextField('DESC')
