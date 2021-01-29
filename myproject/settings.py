@@ -41,9 +41,9 @@ INSTALLED_APPS = [
     'news',
     'newscrawling',
     'weather',
+    'stock',
     'rest_framework',
     'api',
-    'stock',
 ]
 
 MIDDLEWARE = [

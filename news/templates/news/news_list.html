@@ -5,7 +5,6 @@
 <div id="content">
 <h1>News List</h1>
 
-<div class="row">
     <div class="col-4" style="float: left;">
         <form action="" method="POST">
             {% csrf_token %}
@@ -13,28 +12,7 @@
         </form>
     </div>
     
-    <div class="col-6" style="float: right;">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="text" name="search_word" value="{{ search_word }}">
-            <input type="submit" value="Search">
-        </form>
-
-<br/><br/>
-
-        {% if search_list %}
-            {% for news in search_list %}
-                <h3>{{ news.title }}</h3>
-                {{ news.saved_time }}
-                <p>{{ news.content }}</p>
-                <p>{{ news.company }}</p>
-            {% endfor %}
-        {% elif search_keyword %}
-            [{{ search_keyword }}]의 검색 결과가 없습니다.
-        {% endif %}
-    </div>
-
-</div>
+    
 
 
 <div class="container">

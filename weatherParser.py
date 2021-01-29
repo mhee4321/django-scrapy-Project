@@ -10,8 +10,6 @@ django.setup()
 from weather.models import Weather
 
 
-
-
 apikey = "52fe4829cee35ef947d9a0119feda4de"
 city = "Seoul"
 

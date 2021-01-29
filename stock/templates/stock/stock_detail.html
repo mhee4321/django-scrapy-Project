@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}News Detail{% endblock %}
+{% block content %}
+    <div id="content">
+        <h1>{{ object.title }}</h1>
+        <h5><a href={{ object.url }} target="_blank">정보보기</a></h5>
+        <h3> 주식정보 : {{ object.name }}</h3>
+        <ul>
+            <li>가격 : {{ object.price }}</li>
+            <li>저장시간 : {{ object.saved_time }}</li>
+    </div> 
+{% endblock %}
+
+

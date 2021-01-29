@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Stock List{% endblock %}
+{% block content %}
+
+<div id="content">
+<h1>Get Stock</h1>
+
+
+<div class="container">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <td>주식이름</td>
+                <td>url</td>
+                <td>가격</td>
+                <td>게시날짜</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stock in object_list %}
+                <tr>
+                    <td><a href="{% url 'stock:detail' stock.id %}">{{ stock.name }}</a></td>
+                    <td>{{ stock.url }}</td>
+                    <td>{{ stock.price }}</td>
+                    <td>{{ stock.saved_time }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- paging link -->
+    <div>
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+        {% endif %}
+        [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">Next</a>
+        {% endif %}
+    </div>
+    <br><br>
+
+            
+            
+    </div>
+
+
+</div> 
+
+
+{% endblock content %}
+
+
+
+
+
+

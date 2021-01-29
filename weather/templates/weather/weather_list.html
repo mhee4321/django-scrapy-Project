@@ -5,38 +5,7 @@
 <div id="content">
 <h1>Weather List</h1>
 
-<div class="row">
-    <div class="col-4" style="float: left;">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="submit" name="refresh" value="refresh new data" style="height: 30px; width: 120px;" onclick="location.href='news/refresh'">
-        </form>
-    </div>
-    
-    <div class="col-6" style="float: right;">
-        <form action="" method="POST">
-            {% csrf_token %}
-            <input type="text" name="search_word" value="{{ search_word }}">
-            <input type="submit" value="Search">
-        </form>
-
-<br/><br/>
-
-        {% if search_list %}
-            {% for news in search_list %}
-                <h3>{{ news.title }}</h3>
-                {{ news.saved_time }}
-                <p>{{ news.content }}</p>
-                <p>{{ news.company }}</p>
-            {% endfor %}
-        {% elif search_keyword %}
-            [{{ search_keyword }}]의 검색 결과가 없습니다.
-        {% endif %}
-    </div>
-
-</div>
-
-
+<h3> expeted weather </h3>
 <div class="container">
     <table class="table table-striped">
         <thead>
@@ -55,7 +24,7 @@
         <tbody>
             {% for weather in object_list %}
             <tr>
-                <td><a href="{% url 'weather:detail' weather.id %}">{{ weather.city }}</a></td>
+                <td><a href="{% url 'weather:detail' weather.id %}"></a>{{ weather.city }}</a></td>
                 <td>{{ weather.date }}</td>
                 <td>{{ weather.desc }}</td>
                 <td>{{ weather.temp_min }}</td>
@@ -69,40 +38,61 @@
         </tbody>
     </table>
 
-    <!-- paging link -->
-    <div>
-        {% if page_obj.has_previous %}
-            <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
-        {% endif %}
-        [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-        {% endif %}
-    </div>
-    <br><br>
+    </div><!--container-->
 
-            <!-- <nav>
-                <ul class="pagination">
-                    <li class="page-item">
-                        {% if page_obj.has_previous %}
-                            <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
-                        {% endif %}
-                    </li>
-                    <li class="page-item">
-                        [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
-                    </li>
-                    <li class="page-item">
-                        {% if page_obj.has_next %}
-                            <a href="?page={{ page_obj.next_page_number }}">Next</a>
-                        {% endif %}
-                    </li>
-                </ul>
-            </nav> -->
-            
-    </div>
+    <h3> real weather </h3>
+    <div class="container">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <td>도시</td>
+                    <td>날짜</td>
+                    <td>날씨요약</td>
+                    <td>최저기온</td>
+                    <td>최고기온</td>
+                    <td>습도</td>
+                    <td>기압</td>
+                    <td>풍향</td>
+                    <td>풍속</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for weather in object_list %}
+                    
+                    <tr>
+                        <!--<a href="{% url 'weather:detail' weather.id %}">-->
+                        <td>{{ weather.city }}</td>
+                        <td>{{ weather.date }}</td>
+                        <td>{{ weather.desc }}</td>
+                        <td>{{ weather.temp_min }}</td>
+                        <td>{{ weather.temp_max }}</td>
+                        <td>{{ weather.humidity }}</td>
+                        <td>{{ weather.pressure }}</td>
+                        <td>{{ weather.deg }}</td>
+                        <td>{{ weather.speed }}</td>
+                    </tr>
+                    
+                {% endfor %}
+            </tbody>
+        </table>
+    
+        <!-- paging link -->
+        <div>
+            {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}">Prev</a>
+            {% endif %}
+            [ Page {{page_obj.number}} / {{ page_obj.paginator.num_pages}} ]
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">Next</a>
+            {% endif %}
+        </div>
+        <br><br>
+    
+               
+        </div><!--container-->
 
 
-</div> 
+</div> <!--main content-->
 
 
 {% endblock content %}

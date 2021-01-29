@@ -10,4 +10,7 @@ class WeatherLV(ListView):
 class WeatherDV(DetailView):
     model = Weather
 
+
+
+
     

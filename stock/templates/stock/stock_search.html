@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}검색 페이지{% endblock %}
+{% block content %}
+
+<div id="content">
+<h1>Stock Search Engine</h1>
+<hr><hr>
+
+<div>
+    <h5>찾을 주식의 이름을 입력해주세요.</h5>
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="text" name="search_word" value="{{ search_word }}">
+        <input type="submit" value="Search">
+    </form>
+
+<br/><br/>
+
+    {% if search_list %}
+        {% for stock in search_list %}
+            <h3><a href="{% url 'stock:detail' stock.id %}">{{ stock.name }}</a></h3>
+            {{ stock.saved_time }}
+            <p>{{ stock.price }}</p>
+            <p>{{ stock.url }}</p>
+        {% endfor %}
+    {% elif search_keyword %}
+        [{{ search_keyword }}]의 검색 결과가 없습니다.
+    {% endif %}
+</div>
+
+<br><br>
+{% endblock %}
+

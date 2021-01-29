@@ -36,7 +36,7 @@ class NewscrawlingPipeline:
         self.cur = self.con.cursor()
 
     def createTables(self):
-        self.cur.execute("TRUNCATE TABLE IF EXISTS news")
+        self.cur.execute("DROP TABLE IF EXISTS news")
 
         self.cur.execute("CREATE TABLE IF NOT EXISTS news(id INTEGER PRIMARY KEY NOT NULL, title TEXT, company TEXT, content TEXT, saved_time TEXT)")
 

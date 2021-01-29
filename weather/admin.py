@@ -7,3 +7,4 @@ class WeatherAdmin(admin.ModelAdmin):
 
 admin.site.register(Weather, WeatherAdmin)
 
+

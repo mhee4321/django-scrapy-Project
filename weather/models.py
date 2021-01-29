@@ -15,9 +15,8 @@ class Weather(models.Model):
         return self.city + self.date + self.desc
 
     class Meta:
-        verbose_name = 'weather'
-        verbose_name_plural = 'weathers'
         db_table = 'weather'
         ordering = ('date',)
+
 
 

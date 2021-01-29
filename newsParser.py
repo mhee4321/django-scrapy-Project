@@ -1,17 +1,13 @@
-from news.models import News
-import django
-import re
-import sys
-
-from django.http import HttpResponse, JsonResponse
 import requests
+import json
 from bs4 import BeautifulSoup
+
 import os
-
-# sys.path.append("/Users/mhee4/cloud-a/myproject/")
-
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
+import django
 django.setup()
+
+from news.models import News
 
 
 # BASE_DIR = os.path.dirname(os.path.abspath(__file__))
