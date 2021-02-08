@@ -1,7 +1,5 @@
 import requests
 import json
-
-
 import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "myproject.settings")
 import django

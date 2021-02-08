@@ -30,7 +30,7 @@ class NewscrawlingPipeline:
         return item
 
     def setupDBCon(self):
-        self.con = sqlite3.connect(os.path.abspath('/Users/mhee4/cloud-project/db.sqlite3'))
+        self.con = sqlite3.connect(os.path.abspath('../db.sqlite3'))
         # 장고의 db파일로 변겅 
         
         self.cur = self.con.cursor()

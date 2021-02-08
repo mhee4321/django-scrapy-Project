@@ -4,7 +4,7 @@ from api.views import NewsViewSet, StockViewSet, WeatherViewSet
 app_name = 'api'
 
 news_list = NewsViewSet.as_view({ 'get' : 'list' })
-news_detail = NewsViewSet.as_view({ 'get' : 'detial' })
+news_detail = NewsViewSet.as_view({ 'get' : 'detail' })
 
 stock_list = StockViewSet.as_view({ 'get' : 'list' })
 stock_detail = StockViewSet.as_view({ 'get' : 'detail'})
